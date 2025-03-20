@@ -274,7 +274,8 @@ def label_3d_filter(config):
 @cli.command()
 @pass_config
 def label_combined(config):
-    from .label_combined import label_combined_all
+    # from .label_combined import label_combined_all
+    from .label_combined_modified import label_combined_all
     click.echo('Labeling combined videos...')
     label_combined_all(config)
 
@@ -397,7 +398,8 @@ def run_all(config):
 
     from .label_videos import label_videos_filtered_all, label_videos_all
     from .label_videos_3d import label_videos_3d_all
-    from .label_combined import label_combined_all
+    # from .label_combined import label_combined_all
+    from .label_combined_modified import label_combined_all
 
     click.echo('Labeling videos in 2D...')
     if config['filter']['enabled']:
