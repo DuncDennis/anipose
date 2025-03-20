@@ -61,8 +61,8 @@ def visualize_labels(config, labels_fname, outname, fps=300):
     if np.sum(valid) < 10:
         print('Too few valid points to plot, skipping...')
         return
-    lim_min = np.percentile(all_points_flat[valid], 5, axis=0)
-    lim_max = np.percentile(all_points_flat[valid], 95, axis=0)
+    lim_min = np.nanpercentile(all_points_flat[valid], 5, axis=0)
+    lim_max = np.nanpercentile(all_points_flat[valid], 95, axis=0)
     
     # Setup the video writer
     writer = skvideo.io.FFmpegWriter(outname, inputdict={
