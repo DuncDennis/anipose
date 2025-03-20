@@ -13,6 +13,7 @@ from matplotlib.pyplot import get_cmap
 from .common import make_process_fun, natural_keys, get_nframes
 
 def connect(img, points, bps, bodyparts, col=(0,255,0,255)):
+    thickness = 2
     try:
         ixs = [bodyparts.index(bp) for bp in bps]
     except ValueError:
@@ -23,7 +24,7 @@ def connect(img, points, bps, bodyparts, col=(0,255,0,255)):
             continue
         pa = tuple(np.int32(points[a]))
         pb = tuple(np.int32(points[b]))
-        cv2.line(img, tuple(pa), tuple(pb), col, 4)
+        cv2.line(img, tuple(pa), tuple(pb), col, thickness)
 
 def connect_all(img, points, scheme, bodyparts):
     cmap = get_cmap('tab10')
@@ -34,6 +35,8 @@ def connect_all(img, points, scheme, bodyparts):
 
 
 def label_frame(img, points, scheme, bodyparts, cmap='tab10'):
+    radius = 4
+    thickness = 1# -1 for filled
     n_joints, _ = points.shape
 
     cmap_c = get_cmap(cmap)
@@ -49,7 +52,7 @@ def label_frame(img, points, scheme, bodyparts, cmap='tab10'):
         # col = cmap_c(lnum % 10, bytes=True)
         # col = [int(c) for c in col]
         col = (255, 255, 255)
-        cv2.circle(img,(x,y), 7, col[:3], -1)
+        cv2.circle(img,(x,y), radius, col[:3], thickness)
 
     return img
 

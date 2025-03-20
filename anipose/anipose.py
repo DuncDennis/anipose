@@ -260,14 +260,14 @@ def label_2d_filter(config):
 @cli.command()
 @pass_config
 def label_3d(config):
-    from .label_videos_3d import label_videos_3d_all
+    from .label_videos_3d_matplotlib import label_videos_3d_all
     click.echo('Labeling videos in 3D...')
     label_videos_3d_all(config)
 
 @cli.command()
 @pass_config
 def label_3d_filter(config):
-    from .label_videos_3d import label_videos_3d_filtered_all
+    from .label_videos_3d_matplotlib import label_videos_3d_filtered_all
     click.echo('Labeling videos in 3D...')
     label_videos_3d_filtered_all(config)
 
