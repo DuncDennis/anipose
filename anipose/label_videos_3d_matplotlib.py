@@ -81,15 +81,26 @@ def visualize_labels(config, labels_fname, outname, fps=300):
     fixed_elev = 20
     fixed_azim = -60
     
+    # Compute equal aspect ratio limits
+    max_range = np.array([lim_max[0] - lim_min[0], lim_max[1] - lim_min[1], lim_max[2] - lim_min[2]]).max() / 2.0
+    mid_x = (lim_max[0] + lim_min[0]) / 2.0
+    mid_y = (lim_max[1] + lim_min[1]) / 2.0
+    mid_z = (lim_max[2] + lim_min[2]) / 2.0
+
     n_frames = data.shape[0]
     for framenum in trange(n_frames, ncols=70):
         # Instead of clearing everything, we clear the axis and then reapply fixed limits and view
         ax.clear()
         
         # Reapply fixed axis limits so that the view remains fixed
-        ax.set_xlim(lim_min[0], lim_max[0])
-        ax.set_ylim(lim_min[1], lim_max[1])
-        ax.set_zlim(lim_min[2], lim_max[2])
+        # ax.set_xlim(lim_min[0], lim_max[0])
+        # ax.set_ylim(lim_min[1], lim_max[1])
+        # ax.set_zlim(lim_min[2], lim_max[2])
+
+        # Set axis limits to have equal aspect ratio
+        ax.set_xlim(mid_x - max_range, mid_x + max_range)
+        ax.set_ylim(mid_y - max_range, mid_y + max_range)
+        ax.set_zlim(mid_z - max_range, mid_z + max_range)
         
         # Ensure equal aspect ratio
         ax.set_box_aspect((1, 1, 1))
